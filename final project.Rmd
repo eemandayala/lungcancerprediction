@@ -2,7 +2,7 @@
 title: "FinalProject"
 author: "Eeman, Linda, Sofia"
 date: "2025-11-06"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
