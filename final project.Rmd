@@ -9,6 +9,8 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+gender, air pollution, genetic risk, smoking, diet, alcohol
+
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
@@ -39,8 +41,7 @@ m1 <- lm(Level ~ Age + Gender + Air.Pollution + Alcohol.use + Dust.Allergy + Occ
 print(m1)
 
 
-ggplot(data = dat, mapping = aes(x = Level)) + 
-  geom_histogram()
+
 ```
 
 ## Including Plots
@@ -62,5 +63,19 @@ m1 <- polr(Level ~ Age + Gender + "Air Pollution" + "Alcohol use" + "Dust Allerg
              "Shortness of Breath" + Wheezing + "Swallowing Difficulty" + 
              "Clubbing of Finger Nails" + "Frequent Cold" + "Dry Cough" + Snoring, data = dat)
 ```
+
+
+gender, air pollution, genetic risk, smoking, diet, alcohol
+
+```{r}
+library(ggplot2)
+ggplot(dat, aes(x = Level, y = `Air Pollution`)) +
+  geom_bar(stat = "identity")
+ggplot(dat, aes(x = Level, y = `Genetic Risk`)) +
+  geom_bar(stat = "identity")
+ggplot(dat, aes(x = Level, y = `Smoking`)) +
+  geom_bar(stat = "identity")
+```
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
