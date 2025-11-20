@@ -16,7 +16,31 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
-summary(cars)
+library(tidyverse)
+
+dat <- read_csv("cancer patient data sets 2.csv")
+
+library(tidyverse)
+library(MASS)
+
+data <- read_csv("cancer patient data sets 2.csv")
+
+names(data) <- make.names(names(data))
+
+names(data)
+
+data$Level <- factor(data$Level,
+                     levels = c("Low","Medium","High"),
+                     ordered = TRUE)
+
+m1 <- lm(Level ~ Age + Gender + Air.Pollution + Alcohol.use + Dust.Allergy + OccuPational.Hazards + Genetic.Risk + chronic.Lung.Disease + Balanced.Diet + Obesity + Smoking + Passive.Smoker + Chest.Pain + Coughing.of.Blood + Fatigue + Weight.Loss + Shortness.of.Breath + Wheezing + Swallowing.Difficulty + Clubbing.of.Finger.Nails + Frequent.Cold + Dry.Cough + Snoring, data = data)
+
+
+print(m1)
+
+
+ggplot(data = dat, mapping = aes(x = Level)) + 
+  geom_histogram()
 ```
 
 ## Including Plots
@@ -24,7 +48,19 @@ summary(cars)
 You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
+library(tidyverse)
+data <- read_csv("cancer patient data sets 2.csv")
+
+m1 <- polr(Level ~ Age + Gender + Air Pollution + Alcohol use + Dust Allergy + OccuPational Hazards + Genetic Risk + chronic Lung Disease + Balanced Diet + Obesity + Smoking + Passive Smoker + Chest Pain + Coughing of Blood + Fatigue + Weight Loss + Shortness of Breath + Wheezing + Swallowing Difficulty + Clubbing of Finger Nails + Frequent Cold + Dry Cough + Snoring, data = data)
+
+summary(m1)
+
+m1 <- polr(Level ~ Age + Gender + "Air Pollution" + "Alcohol use" + "Dust Allergy" + 
+             "OccuPational Hazards" + "Genetic Risk" + "chronic Lung Disease" + 
+             "Balanced Diet" + Obesity + Smoking + "Passive Smoker" + 
+             "Chest Pain" + "Coughing of Blood" + Fatigue + "Weight Loss" + 
+             "Shortness of Breath" + Wheezing + "Swallowing Difficulty" + 
+             "Clubbing of Finger Nails" + "Frequent Cold" + "Dry Cough" + Snoring, data = dat)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
