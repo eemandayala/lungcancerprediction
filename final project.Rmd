@@ -79,3 +79,23 @@ ggplot(dat, aes(x = Level, y = `Smoking`)) +
 
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r cars}
+
+library(tidyverse)
+
+dat_long <- dat|>
+  pivot_longer(
+    cols = c(`Air Pollution`, `Genetic Risk`, Smoking, `Alcohol use`),
+    names_to = "Variable",
+    values_to = "Value")
+
+
+ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
+  geom_boxplot() +
+  facet_wrap(~ Variable, scales = "free_y") +
+  theme_bw()
+
+
+```
+
