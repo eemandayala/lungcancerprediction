@@ -75,6 +75,10 @@ ggplot(dat, aes(x = Level, y = `Genetic Risk`)) +
   geom_bar(stat = "identity")
 ggplot(dat, aes(x = Level, y = `Smoking`)) +
   geom_bar(stat = "identity")
+
+table(dat$"Genetic Risk", dat$Level)
+chisq.test(table(dat$"Genetic Risk", dat$Level)) 
+
 ```
 
 
