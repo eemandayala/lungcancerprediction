@@ -22,26 +22,32 @@ library(tidyverse)
 
 dat <- read_csv("cancer patient data sets 2.csv")
 
-library(tidyverse)
 library(MASS)
 
-data <- read_csv("cancer patient data sets 2.csv")
+dat <- read_csv("cancer patient data sets 2.csv")
 
-names(data) <- make.names(names(data))
+names(dat) <- make.names(names(dat))
 
-names(data)
+names(dat)
 
-data$Level <- factor(data$Level,
+dat$Level <- factor(dat$Level,
                      levels = c("Low","Medium","High"),
                      ordered = TRUE)
 
-m1 <- lm(Level ~ Age + Gender + Air.Pollution + Alcohol.use + Dust.Allergy + OccuPational.Hazards + Genetic.Risk + chronic.Lung.Disease + Balanced.Diet + Obesity + Smoking + Passive.Smoker + Chest.Pain + Coughing.of.Blood + Fatigue + Weight.Loss + Shortness.of.Breath + Wheezing + Swallowing.Difficulty + Clubbing.of.Finger.Nails + Frequent.Cold + Dry.Cough + Snoring, data = data)
-
-
-print(m1)
+dat <- dat |>
+  mutate(High = if_else(Level == "High", 1, 0))
 
 
 
+m1 <- glm(High ~ Gender + Genetic.Risk + Age + Smoking + Air.Pollution + Obesity + Chest.Pain + Coughing.of.Blood + Shortness.of.Breath, data = dat, family = "binomial")
+
+summary(m1)
+
+exp(7.6069)
+exp(4.1667)
+exp(6.3718)
+exp(-0.7692)
+exp( 10.4882)
 ```
 
 ## Including Plots
@@ -52,16 +58,9 @@ You can also embed plots, for example:
 library(tidyverse)
 data <- read_csv("cancer patient data sets 2.csv")
 
-m1 <- polr(Level ~ Age + Gender + Air Pollution + Alcohol use + Dust Allergy + OccuPational Hazards + Genetic Risk + chronic Lung Disease + Balanced Diet + Obesity + Smoking + Passive Smoker + Chest Pain + Coughing of Blood + Fatigue + Weight Loss + Shortness of Breath + Wheezing + Swallowing Difficulty + Clubbing of Finger Nails + Frequent Cold + Dry Cough + Snoring, data = data)
+m2 <- glm(High ~ Gender + Genetic.Risk + Age + Smoking + Air.Pollution + Obesity, data = dat, family = "binomial")
 
-summary(m1)
-
-m1 <- polr(Level ~ Age + Gender + "Air Pollution" + "Alcohol use" + "Dust Allergy" + 
-             "OccuPational Hazards" + "Genetic Risk" + "chronic Lung Disease" + 
-             "Balanced Diet" + Obesity + Smoking + "Passive Smoker" + 
-             "Chest Pain" + "Coughing of Blood" + Fatigue + "Weight Loss" + 
-             "Shortness of Breath" + Wheezing + "Swallowing Difficulty" + 
-             "Clubbing of Finger Nails" + "Frequent Cold" + "Dry Cough" + Snoring, data = dat)
+summary(m2)
 ```
 
 
@@ -99,6 +98,29 @@ ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
   geom_boxplot() +
   facet_wrap(~ Variable, scales = "free_y") +
   theme_bw()
+
+
+library(tidyverse)
+
+dat <- read_csv("cancer patient data sets 2.csv")
+
+library(tidyverse)
+library(MASS)
+
+data <- read_csv("cancer patient data sets 2.csv")
+
+names(data) <- make.names(names(data))
+
+names(data)
+
+data$Level <- factor(data$Level,
+                     levels = c("Low","Medium","High"),
+                     ordered = TRUE)
+
+m1 <- lm(Level ~ Age + Gender + Air.Pollution + Alcohol.use + Dust.Allergy + OccuPational.Hazards + Genetic.Risk + chronic.Lung.Disease + Balanced.Diet + Obesity + Smoking + Passive.Smoker + Chest.Pain + Coughing.of.Blood + Fatigue + Weight.Loss + Shortness.of.Breath + Wheezing + Swallowing.Difficulty + Clubbing.of.Finger.Nails + Frequent.Cold + Dry.Cough + Snoring, data = data)
+
+
+print(m1)
 
 
 ```
