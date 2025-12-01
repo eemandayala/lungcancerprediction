@@ -3,8 +3,8 @@ title: "FinalProject"
 author: "Eeman, Linda, Sofia"
 date: "2025-11-06"
 output:
-  word_document: default
   pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r cars}
+```{r}
 library(tidyverse)
 
 dat <- read_csv("cancer patient data sets 2.csv")
@@ -38,8 +38,8 @@ m1causes <- glm(High ~ Gender + Genetic.Risk + Age + Smoking + Air.Pollution + O
 
 m1symptoms <- glm(High ~  Chest.Pain + Coughing.of.Blood + Shortness.of.Breath, data = dat, family = "binomial")
 
-summary(m1)
-summary(m3)
+summary(m1causes)
+summary(m3symptoms)
 
 exp(7.6069)
 exp(4.1667)
@@ -82,7 +82,7 @@ dg %>%
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
+```{r}
 library(tidyverse)
 data <- read_csv("cancer patient data sets 2.csv")
 
@@ -111,7 +111,7 @@ chisq.test(table(dat$"Genetic Risk", dat$Level))
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-```{r cars}
+```{r}
 
 library(tidyverse)
 
