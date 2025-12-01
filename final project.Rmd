@@ -32,9 +32,9 @@ dat <- dat |>
 
 
 
-m1 <- glm(High ~ Gender + Genetic.Risk + Age + Smoking + Air.Pollution + Obesity, data = dat, family = "binomial")
+m1causes <- glm(High ~ Gender + Genetic.Risk + Age + Smoking + Air.Pollution + Obesity, data = dat, family = "binomial")
 
-m3 <- glm(High ~  Chest.Pain + Coughing.of.Blood + Shortness.of.Breath, data = dat, family = "binomial")
+m1symptoms <- glm(High ~  Chest.Pain + Coughing.of.Blood + Shortness.of.Breath, data = dat, family = "binomial")
 
 summary(m1)
 summary(m3)
