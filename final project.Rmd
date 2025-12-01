@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r, include=FALSE}
+```{r}
 library(tidyverse)
 
 dat <- read_csv("cancer patient data sets 2.csv")
@@ -36,7 +36,7 @@ dat <- dat |>
 
 m1causes <- glm(High ~ Gender + Genetic.Risk + Age + Smoking + Air.Pollution + Obesity, data = dat, family = "binomial")
 
-m1symptoms <- glm(High ~  Chest.Pain + Coughing.of.Blood + Shortness.of.Breath, data = dat, family = "binomial")
+m1symptoms <- glm(High ~  Chest.Pain + Coughing.of.Blood + Shortness.of.Breath + Weight.Loss + Frequent.Cold, data = dat, family = "binomial")
 
 summary(m1causes)
 summary(m1symptoms)
@@ -47,6 +47,7 @@ exp(6.3718)
 exp(-0.7692)
 exp( 10.4882)
 ```
+
 ```{r, echo=FALSE}
 library(gt)
 
@@ -66,10 +67,10 @@ df %>%
 
 
 dg <- data.frame(
-  Estimate = c(-9.427,0.123,1.291,0.212),
-  "Standard Error" = c(0.606,0.081,0.113,0.0666),
-  pValue = c(2e-16,0.127,2e-16,0.001),
-  row.names = c("Intercept","Chest Pain","Coughing of Blood","Shortness of Breath")
+  Estimate = c(-18.285,0.848,1.356,-0.147,1.102,0.368),
+  "Standard Error" = c(1.762,0.148,0.147,0.112,0.176,0.104),
+  pValue = c(2e-16,1.14e-8,2e-16,0.190,3.42e-10,3.89e-4),
+  row.names = c("Intercept","Chest Pain","Coughing of Blood","Shortness of Breath","Weight Loss","Frequent Cold")
 )
 dg %>%
   gt(rownames_to_stub = TRUE) %>%
