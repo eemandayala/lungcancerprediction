@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r}
+```{r, include=FALSE}
 library(tidyverse)
 
 dat <- read_csv("cancer patient data sets 2.csv")
@@ -47,7 +47,7 @@ exp(6.3718)
 exp(-0.7692)
 exp( 10.4882)
 ```
-```{r}
+```{r, echo=FALSE}
 library(gt)
 
 
@@ -78,11 +78,7 @@ dg %>%
   )
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r}
+```{r,include=FALSE}
 library(tidyverse)
 data <- read_csv("cancer patient data sets 2.csv")
 
@@ -93,7 +89,7 @@ summary(m2)
 
 
 
-```{r}
+```{r,echo=FALSE}
 library(ggplot2)
 ggplot(dat, aes(x = Level, y = `Air.Pollution`)) +
   geom_bar(stat = "identity")
@@ -107,11 +103,7 @@ chisq.test(table(dat$"Genetic.Risk", dat$Level))
 
 ```
 
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-```{r}
-
+```{r,echo=FALSE}
 library(tidyverse)
 
 dat_long <- dat|>
@@ -125,8 +117,10 @@ ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
   geom_boxplot() +
   facet_wrap(~ Variable, scales = "free_y") +
   theme_bw()
+```
 
 
+```{r,include=FALSE}
 library(tidyverse)
 
 dat <- read_csv("cancer patient data sets 2.csv")
