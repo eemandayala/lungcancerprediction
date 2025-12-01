@@ -32,9 +32,12 @@ dat <- dat |>
 
 
 
-m1 <- glm(High ~ Gender + Genetic.Risk + Age + Smoking + Air.Pollution + Obesity + Chest.Pain + Coughing.of.Blood + Shortness.of.Breath, data = dat, family = "binomial")
+m1 <- glm(High ~ Gender + Genetic.Risk + Age + Smoking + Air.Pollution + Obesity, data = dat, family = "binomial")
+
+m3 <- glm(High ~  Chest.Pain + Coughing.of.Blood + Shortness.of.Breath, data = dat, family = "binomial")
 
 summary(m1)
+summary(m3)
 
 exp(7.6069)
 exp(4.1667)
