@@ -79,70 +79,71 @@ dg %>%
   )
 ```
 
-```{r,include=FALSE}
-library(tidyverse)
-data <- read_csv("cancer patient data sets 2.csv")
-
-m2 <- glm(High ~ Gender + Genetic.Risk + Age + Smoking + Air.Pollution + Obesity, data = dat, family = "binomial")
-
-summary(m2)
-```
-
-
-
-```{r,echo=FALSE}
-library(ggplot2)
-ggplot(dat, aes(x = Level, y = `Air.Pollution`)) +
-  geom_bar(stat = "identity")
-ggplot(dat, aes(x = Level, y = `Genetic.Risk`)) +
-  geom_bar(stat = "identity")
-ggplot(dat, aes(x = Level, y = `Smoking`)) +
-  geom_bar(stat = "identity")
-
-table(dat$"Genetic.Risk", dat$Level)
-chisq.test(table(dat$"Genetic.Risk", dat$Level)) 
-
-```
 
 ```{r,echo=FALSE}
 library(tidyverse)
+
+label_vec <- c(
+  "Age" = "Age (years)"
+)
 
 dat_long <- dat|>
   pivot_longer(
-    cols = c(`Air.Pollution`, `Genetic.Risk`, Smoking),
+    cols = c(Genetic.Risk, Age, Smoking, Air.Pollution, Obesity),
     names_to = "Variable",
-    values_to = "Value")
+    values_to = "Value") |>
+
+mutate(Variable = recode(Variable,
+                           "Age" = "Age (years)"))
 
 
 ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
   geom_boxplot() +
   facet_wrap(~ Variable, scales = "free_y") +
-  theme_bw()
+  scale_fill_manual(
+  values = c(
+    "Low" = "pink",
+    "Medium" = "turquoise",
+    "High" = "yellow"
+  )
+) +
+  theme_bw() |>
+ labs(
+    title = "Personal and Environmental Predictors",
+    x = "Cancer Level",
+    y = "Value"
+  )
+
+
+library(tidyverse)
+
+dat_long <- dat|>
+  pivot_longer(
+    cols = c(Chest.Pain, Coughing.of.Blood, Shortness.of.Breath, Weight.Loss, Frequent.Cold),
+    names_to = "Variable",
+    values_to = "Value") 
+
+
+ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
+  geom_boxplot() +
+  facet_wrap(~ Variable, scales = "free_y") +
+    scale_fill_manual(
+  values = c(
+    "Low" = "pink",
+    "Medium" = "turquoise",
+    "High" = "yellow"
+  )
+  ) +
+  theme_bw() |>
+ labs(
+    title = "Symptom Predictors",
+    x = "Cancer Level",
+    y = "Value"
+  )
+
 ```
 
 
-```{r,include=FALSE}
-library(tidyverse)
-
-dat <- read_csv("cancer patient data sets 2.csv")
-
-library(tidyverse)
-library(MASS)
-
-data <- read_csv("cancer patient data sets 2.csv")
-
-names(data) <- make.names(names(data))
-
-names(data)
-
-data$Level <- factor(data$Level,
-                     levels = c("Low","Medium","High"),
-                     ordered = TRUE)
-
-m1 <- lm(Level ~ Age + Gender + Air.Pollution + Alcohol.use + Dust.Allergy + OccuPational.Hazards + Genetic.Risk + chronic.Lung.Disease + Balanced.Diet + Obesity + Smoking + Passive.Smoker + Chest.Pain + Coughing.of.Blood + Fatigue + Weight.Loss + Shortness.of.Breath + Wheezing + Swallowing.Difficulty + Clubbing.of.Finger.Nails + Frequent.Cold + Dry.Cough + Snoring, data = data)
-
-
-print(m1)
 
 
 ```
