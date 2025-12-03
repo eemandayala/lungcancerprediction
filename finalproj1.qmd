@@ -1,15 +1,8 @@
 ---
-title: "FinalProject"
-author: "Eeman, Linda, Sofia"
-date: "2025-11-06"
-output:
-  pdf_document: default
+title: "Creating a New Doc"
+format: pdf
+editor: visual
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
 
 ```{r include=FALSE}
 library(tidyverse)
@@ -47,103 +40,6 @@ exp(-0.7692)
 exp( 10.4882)
 ```
 
-```{r chunky one, include=FALSE, paged.print=TRUE}
-library(gt)
-
-
-df <- data.frame(
-  Estimate = c(-16.270, 1.928, -0.258,-0.052,.794,1.227,1.590),
-  "Standard Error" = c(1.796, 0.476, 0.142,0.014,0.102,.137,.149),
-  pValue = c(2.00e-16,5.14e-5,0.071,2.00e-4,1.15e-14,2.00e-16,2.00e-16),
-  row.names = c("Intercept","Gender", "Genetic Risk", "Age","Smoking","Air Pollution", "Obesity")
-)
-df %>%
-  gt(rownames_to_stub = TRUE) %>%
-  tab_header(
-    title = "Logression Coefficients For Cancer Markers"
-  )
-
-
-
-dg <- data.frame(
-  Estimate = c(-18.285,0.848,1.356,-0.147,1.102,0.368),
-  "Standard Error" = c(1.762,0.148,0.147,0.112,0.176,0.104),
-  pValue = c(2e-16,1.14e-8,2e-16,0.190,3.42e-10,3.89e-4),
-  row.names = c("Intercept","Chest Pain","Coughing of Blood","Shortness of Breath","Weight Loss","Frequent Cold")
-)
-dg %>%
-  gt(rownames_to_stub = TRUE) %>%
-  tab_header(
-    title = "Logression Coefficients For Cancer Symptoms"
-  )
-```
-
-
-```{r chunky two, include=FALSE, paged.print=TRUE}
-library(tidyverse)
-
-label_vec <- c(
-  "Age" = "Age (years)"
-)
-
-dat_long <- dat|>
-  pivot_longer(
-    cols = c(Genetic.Risk, Age, Smoking, Air.Pollution, Obesity),
-    names_to = "Variable",
-    values_to = "Value") |>
-
-mutate(Variable = recode(Variable,
-                           "Age" = "Age (years)"))
-
-
-ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
-  geom_boxplot() +
-  facet_wrap(~ Variable, scales = "free_y") +
-  scale_fill_manual(
-  values = c(
-    "Low" = "pink",
-    "Medium" = "turquoise",
-    "High" = "yellow"
-  )
-) +
-  theme_bw() |>
- labs(
-    title = "Personal and Environmental Predictors",
-    x = "Cancer Level",
-    y = "Value"
-  )
-
-
-library(tidyverse)
-
-dat_long <- dat|>
-  pivot_longer(
-    cols = c(Chest.Pain, Coughing.of.Blood, Shortness.of.Breath, Weight.Loss, Frequent.Cold),
-    names_to = "Variable",
-    values_to = "Value") 
-
-
-ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
-  geom_boxplot() +
-  facet_wrap(~ Variable, scales = "free_y") +
-    scale_fill_manual(
-  values = c(
-    "Low" = "pink",
-    "Medium" = "turquoise",
-    "High" = "yellow"
-  )
-  ) +
-  theme_bw() |>
- labs(
-    title = "Symptom Predictors",
-    x = "Cancer Level",
-    y = "Value"
-  )
-
-```
-
-
-
 ```{r, echo=FALSE}
 library(gt)
 
@@ -161,7 +57,6 @@ df %>%
   )
 ```
 
-
 ```{r, echo=FALSE}
 dg <- data.frame(
   Estimate = c(-18.285,0.848,1.356,-0.147,1.102,0.368),
@@ -175,7 +70,6 @@ dg %>%
     title = "Logression Coefficients For Cancer Symptoms"
   )
 ```
-
 
 ```{r, echo=FALSE}
 library(tidyverse)
@@ -212,7 +106,6 @@ ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
   )
 ```
 
-
 ```{r, echo=FALSE}
 library(tidyverse)
 
@@ -239,4 +132,3 @@ ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
     y = "Value"
   )
 ```
-
