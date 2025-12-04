@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.8.2)  3 DEC 2025 19:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.12.3)  3 DEC 2025 19:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **final-project.tex
 (./final-project.tex
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-07-20>
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-14>
 (/home/guest/.TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
 (/home/guest/.TinyTeX/texmf-dist/tex/latex/base/size10.clo
@@ -23,7 +23,7 @@ File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip50
 \bibindent=\dimen148
 ) (/home/guest/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2025/06/16 v2.17y AMS math features
+Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip51
 For additional information on amsmath, use the `?' option.
 (/home/guest/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -83,8 +83,8 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \multlinegap=\skip52
 \multlinetaggap=\skip53
 \mathdisplay@stack=\toks21
-LaTeX Info: Redefining \[ on input line 2949.
-LaTeX Info: Redefining \] on input line 2950.
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
 ) (/home/guest/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 (/home/guest/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -97,7 +97,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 )) (/home/guest/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ) (/home/guest/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
 ) (/home/guest/.TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks22
@@ -146,7 +146,7 @@ Package: microtype 2025/07/09 v3.2b Micro-typographical refinements (RS)
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks24
 ) (/home/guest/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count295
 )
 \MT@toks=\toks25
@@ -187,7 +187,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 274.
 (/home/guest/.TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
 ) (/home/guest/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
@@ -266,7 +266,7 @@ Package caption Info: Standard document class detected.
 \c@caption@flags=\count305
 \c@continuedfloat=\count306
 ) (/home/guest/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2024-12-18 v4.23 Multi-page Table package (DPC)
+Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \LTleft=\skip55
 \LTright=\skip56
 \LTpre=\skip57
@@ -286,7 +286,7 @@ Package: longtable 2024-12-18 v4.23 Multi-page Table package (DPC)
 ) (/home/guest/.TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
 (/home/guest/.TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \col@sep=\dimen191
 \ar@mcellbox=\box62
 \extrarowheight=\dimen192
@@ -406,7 +406,7 @@ LaTeX Font Info:    Trying to load font information for T1+lmr on input line 79.
 (/home/guest/.TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (/home/guest/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count326
 )
 No file final-project.aux.
@@ -530,13 +530,9 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 81.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/home/guest/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
+) [1
 
-[1
-
-{/home/guest/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/guest/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
-
-[2]
+{/home/guest/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/guest/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}] [2]
 
 ! LaTeX Error: Unicode character ≈ (U+2248)
                not set up for use with LaTeX.
@@ -552,11 +548,11 @@ You may provide a definition with
 
  
 Here is how much of TeX's memory you used:
- 14723 strings out of 469721
- 235166 string characters out of 5480335
- 685650 words of memory out of 5000000
- 42858 multiletter control sequences out of 15000+600000
- 654675 words of font info for 94 fonts, out of 8000000 for 9000
+ 14733 strings out of 469458
+ 235352 string characters out of 5468079
+ 689309 words of memory out of 5000000
+ 43131 multiletter control sequences out of 15000+600000
+ 655571 words of font info for 94 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 83i,9n,93p,1010b,459s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 83i,9n,93p,1010b,463s stack positions out of 10000i,1000n,20000p,200000b,200000s
 !  ==> Fatal error occurred, no output PDF file produced!
