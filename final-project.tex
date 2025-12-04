@@ -1,0 +1,451 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{anyfontsize}
+\usepackage{multirow}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={FinalProject},
+  pdfauthor={Eeman, Linda, Sofia},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{FinalProject}
+\author{Eeman, Linda, Sofia}
+\date{2025-11-06}
+
+\begin{document}
+\maketitle
+
+\subsection{Multivariable Analysis of Symptom Profiles and Risk Factors
+in Cancer
+Patients}\label{multivariable-analysis-of-symptom-profiles-and-risk-factors-in-cancer-patients}
+
+\subsection{Introduction}\label{introduction}
+
+The objective of this project is to investigate the relationship between
+patient characteristics/symptoms and their relative risk to severity of
+cancer. Lung cancer is becoming a global problem with the highest
+recorded mortality among other types of cancer (Shankar et al., 2019).
+Although smoking has been strongly associated with lung cancer, there
+has been a rise of incidences among non-smokers. Add citation This can
+be attributed to other factors involving lifestyle and environmental
+conditions.
+
+By modeling and observing these relationships, we hope to understand
+possible patterns to help target demographic, genetic, and lifestyle
+factors. Through exploring possible associations between these variables
+and cancer risk severity, individuals will be able to gauge personal
+risk to cancer early on and receive preventative rather than treatment
+care, which can often be more expensive and strenuous.
+
+The central research question is: Which symptoms and
+personal/environmental factors are associated with having a high cancer
+severity level?
+
+For this project, we obtained data from Kaggle, specifically in a
+dataset uploaded by Rishi Damarla. It was made publicly available for
+educational and analytical purposes. (Damarla, n.d.) The dataset was
+taken from a study published in Nature medicine analyzing data from
+420,000 people in China who were followed for six years.
+
+The dataset has a variety of predictor variables including ones that are
+demographic, environmental, lifestyle related, and ones related to
+medical history/genetic factors. For the purposes of this project, we
+will look specifically at personal/environmental factors (age, gender,
+alcohol use, smoking, obesity, air pollution, and genetic risk).
+Additionally, we are also interested in the manifestation of high risk
+cancer and will be observing various relevant clinical symptoms (chest
+pain, fatigue, coughing of blood, shortness of breath, weight loss, and
+frequent cold). Though we can not explore every factor with the
+precision it deserves within the scope of this project, we hoped to
+choose a select six that gave insight into each of the broader
+categories and symptoms that were diverse enough across various body
+systems.
+
+Many studies have examined the role of lifestyle factors and their
+impact on lung cancer risk. Our group referenced 2 studies to analyze
+and relate back to our work. In one of them, it was found that among
+heavy former smokers, lung cancer risk drops within five years after
+quitting (YSO) relative to continuing smokers. Additionally, a drop in
+lung cancer risk remains more than threefold higher than never smokers
+after 25 YSQ. (Tindle, Hilary A., et al.) However, our data accounts for
+a variety of factors apart from smoking. Through further research, we
+found that approximately 42\% of all cancer cases and nearly one-half of
+all cancer deaths in the United States in 2014 were attributable to
+evaluated risk factors (Islami, Farhad, et al). This data displays the
+significance of monitoring characteristics that may further increase the
+risk of lung cancer.
+
+\subsection{Methodology}\label{methodology}
+
+TAll analyses for this project were conducted in R, utilizing tidyverse
+packages. Based on our goal to determine how multiple variables affect
+cancer severity level, we used a logistic regression model based
+approach to deal with both continual and categorical variables. We
+initially considered using a chi squared test and linear regression
+model. However, the chi squared test does not account for other
+variables when evaluating differences between variables. The linear
+regression model was not suitable for the outcome variable ``Level'' in
+the dataset which is a categorical non-numerical variable.
+
+The response variable we are interested in is severity of cancer
+(Level). In order to produce a logistic regression, we will be
+simplifying this into a binary in which ``Low'' and ``Medium'' will be
+combined and put in contrast to ``High''. The objective in doing this is
+to observe whether certain lifestyle and personal/environment factors
+can predict whether or not someone has severe/high cancer risk.
+
+The binary outcome variable was defined as: 1 = High Cancer Level\\
+0 = Low or Medium Cancer Level
+
+Throughout this project, we utilized boxplots as a method of exploratory
+visualization. This helped us assess possible patterns and trends while
+also comparing the logistic regression output.
+
+Logistic regression has two main assumptions: independence of
+observations and linearity in the log-odds. Independence is satisfied
+for this dataset as the patients are unrelated. Evaluating linearity
+assumption for this model is outside the scope of this course. Other
+researchers would achieve replicability as the outlined procedure is
+straightforward. The analysis was designed to be fully replicable. Other
+researchers can reproduce the results by pulling the same dataset,
+renaming variables for clarity, recoding the Level variable as an
+ordered factor, and fitting the provided logistic regression model:
+
+Level \textasciitilde{} Age + Gender + Air Pollution + Alcohol use +
+Dust Allergy + OccuPational Hazards + Genetic Risk + Chronic Lung
+Disease + Balanced Diet + Obesity + Smoking + Passive Smoker + Chest
+Pain + Coughing of Blood + Fatigue + Weight Loss + Shortness of Breath +
+Wheezing + Swallowing Difficulty + Clubbing of Finger Nails + Frequent
+Cold + Dry Cough + Snoring
+
+Equation 1: Logistic Regression Model Input
+
+In addition to regression modeling, box-plots were used as a means of
+Exploratory Data Analysis (EDA), to visualize the distribution of
+outcome variables and identify trends. The box plot model worked best
+with our variables given that we were working with categorical variables
+which would have been hard to showcase if we had used scatterplots,
+comparative pie charts, or histograms.
+
+\subsection{Results}\label{results}
+
+To evaluate the results, a hypothesis test was included. The null
+hypothesis is that the slope of the predictor is 0, meaning there is no
+association between the predictor and the log-odds of the cancer level
+while controlling for other predictors in the model. The alternative
+hypothesis is that the slope coefficient of the specified predictor is
+not 0. The significance level was set to 0.01.
+
+The results from the regression model are shown below.
+
+\subsection{Symptom Predictors}\label{symptom-predictors}
+
+\begin{table}[t]
+\caption*{
+{\large Logression Coefficients For Cancer Symptoms}
+} 
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|rrr}
+\toprule
+ & Estimate & Standard.Error & pValue \\ 
+\midrule\addlinespace[2.5pt]
+Intercept & -18.285 & 1.762 & 2.00e-16 \\ 
+Chest Pain & 0.848 & 0.148 & 1.14e-08 \\ 
+Coughing of Blood & 1.356 & 0.147 & 2.00e-16 \\ 
+Shortness of Breath & -0.147 & 0.112 & 1.90e-01 \\ 
+Weight Loss & 1.102 & 0.176 & 3.42e-10 \\ 
+Frequent Cold & 0.368 & 0.104 & 3.89e-04 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+Table 1 : Logistic regression model for symptoms predicting cancer level
+
+Chest Pain, Coughing of Blood, Weight Loss, and Frequent Cold were
+statistically significant predictors of high cancer severity (p
+\textless{} 0.01), and we reject the null hypothesis for each. Hence,
+there is sufficient evidence to suggest that the log odds of having high
+cancer level is associated with each of these predictors while
+controlling for the predictors in the model.
+
+These symptoms are recorded in terms of a numerical Likert scale. For
+instance, we can interpret the odds for chest pain as comparing two
+individuals who are identical on all other symptoms, but where one
+reports a chest pain score one unit higher, this individual is predicted
+to have exp(0.8487) ≈ 2.34 times the odds of being in the high cancer
+category compared to the individual with the lower chest pain score.
+Using the same interpretation, a one unit increase in the coughing blood
+severity score is predicted to have exp(0.1.3555) ≈ 3.88 times the odds
+of high cancer severity, weight loss with exp(1.1024) ≈ 3.01 times the
+odds, and frequent cold symptoms with exp(0.0.3682) ≈ 1.45 times the
+odds. Again, each of these interpretations is under the assumption that
+the two individuals are equal in all other aspects.
+
+Shortness of Breath was not statistically significant (p : 0.19
+\textgreater{} 0.01), so we fail to reject the null hypothesis for this
+predictor. Hence, there is not enough evidence to suggest an association
+between shortness of breath and having a specific cancer level.
+
+\subsection{Personal/Environmental Factor
+Predictors}\label{personalenvironmental-factor-predictors}
+
+\begin{table}[t]
+\caption*{
+{\large Logression Coefficients For Cancer Markers}
+} 
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|rrr}
+\toprule
+ & Estimate & Standard.Error & pValue \\ 
+\midrule\addlinespace[2.5pt]
+Intercept & -16.270 & 1.796 & 2.00e-16 \\ 
+Gender & 1.928 & 0.476 & 5.14e-05 \\ 
+Genetic Risk & -0.258 & 0.142 & 7.10e-02 \\ 
+Age & -0.052 & 0.014 & 2.00e-04 \\ 
+Smoking & 0.794 & 0.102 & 1.15e-14 \\ 
+Air Pollution & 1.227 & 0.137 & 2.00e-16 \\ 
+Obesity & 1.590 & 0.149 & 2.00e-16 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+Table 2: Logistic regression model output for personal/environmental
+factors predicting cancer level
+
+Gender, Age, Smoking, Air Pollution, and Obesity were statistically
+significant predictors of high cancer severity (p \textless{} 0.01), and
+we reject the null hypothesis for each of these variables. Thus, there
+is sufficient evidence to suggest that the log odds of being in the high
+cancer category is associated with these predictors, while controlling
+for the other factors in the model.
+
+Age is a discrete numerical variable. Hence, we can interpret the
+regression model as when comparing two individuals with similar factors
+where one is one year older than the other, the older individual is
+predicted to have exp (--0.0134) ≈ 0.95 times the odds of being in the
+high cancer category compared to the younger individual.
+
+Like the symptom predictors, Smoking, Air Pollution, and Obesity are
+measured on Likert-type scales. A one-unit increase in smoking severity
+corresponds to exp(0.7944) ≈ 2.21 times the odds of high cancer
+severity, holding all else constant. A one-unit increase in air
+pollution exposure corresponds to exp(1.2270) ≈ 3.41 times the odds, and
+a one-unit increase in obesity corresponds to exp(1.5900) ≈ 4.90 times
+the odds of being in the high cancer category.
+
+Gender is a categorical variable coded as 1 = female and 2 = male.
+Interpreting the odds for gender, males are predicted to have
+exp(1.9282) ≈ 6.87 times the odds of being in the high cancer category
+compared to females, holding all other variables constant.
+
+Finally, Genetic Risk, although measured on an ordinal scale, did not
+show a statistically significant effect (p = 0.07 \textgreater{} 0.01).
+Therefore, we fail to reject the null hypothesis for this predictor,
+indicating insufficient evidence that a one-unit increase in genetic
+risk meaningfully changes the odds of high cancer severity within this
+model.
+
+\subsection{Visual Representation}\label{visual-representation}
+
+Two sets of box plots were made corresponding to the two predictor
+categories.
+
+\pandocbounded{\includegraphics[keepaspectratio]{final-project_files/figure-latex/unnamed-chunk-5-1.pdf}}
+
+For the personal and environmental predictors, the boxplots show
+noticeable increase in Smoking, Air Pollution and Obesity scores as
+cancer severity level increases to high. For genetic risk, there seems
+to be a difference between Low and High Cancer level with the Medium
+level having a broader genetic risk score overlapping with both. This
+aligns with the regression model as the low and medium cancer level
+together overlap entirely with the high level box plot. However, age
+does not seem to align with the model as the box plots overlap a lot
+between the levels in terms of age which might contradict it being
+statistically significant.
+
+\pandocbounded{\includegraphics[keepaspectratio]{final-project_files/figure-latex/unnamed-chunk-6-1.pdf}}
+
+For the symptom predictors, the box plots show patterns that are
+somewhat consistent with the regression model with some exceptions.
+Chest Pain and Coughing of Blood display the clearest visual differences
+across cancer severity levels, with noticeably higher scores in the High
+category that aligns with the model. Weight Loss and Frequent Cold also
+show increases in the High category, but the distributions overlap more
+substantially with the Low and Medium groups which can suggest a weaker
+association comparatively even though they are stated to be
+statistically significant based on the model. Finally, although
+shortness of breath was not statistically significant in the model,
+there is some indication that the high level cancer has a slightly
+higher score for this symptom.
+
+\subsection{Discussion}\label{discussion}
+
+The aim of our study was to examine various biological and environmental
+factors as they relate to the manifestation of cancer severity, as well
+as to understand how symptoms associate with the different stages of
+cancer. Overall, the results of our manuscript successfully address
+these goals by showing the varying associations between each symptom or
+risk factor and the level of cancer severity. Looking specifically at
+symptoms, Chest Pain, Coughing of Blood, Weight Loss, and Frequent Cold
+all had statistically significant p-values, indicating that these
+symptoms were more prevalent among individuals with high-level cancer
+compared to those with low or medium levels. Because of this, we have
+reason to believe that the presence of these symptoms may indicate that
+an individual is more likely to fall in the high-severity category. In
+contrast, Shortness of Breath did not reach statistical significance in
+our model. Its p-value was greater than 0.01, so we failed to reject the
+null hypothesis and concluded that there is insufficient evidence to
+claim a relationship between shortness of breath and cancer severity.
+
+A similar pattern appears when examining personal and environmental risk
+factors. Age, gender, air pollution exposure, obesity, and smoking all
+showed strong statistical significance, suggesting that these
+characteristics are associated with higher cancer severity. For example,
+males and older individuals were predicted to have higher odds of severe
+cancer compared to their females and younger counterparts. However, one
+of our original goals was to explore genetic risk as a factor, and our
+model did not support a statistically significant association between
+genetic markers and cancer severity. Because its p-value exceeded 0.05,
+we failed to reject the null hypothesis for genetic risk, meaning we did
+not find enough evidence to claim that higher genetic risk scores
+meaningfully predict cancer severity in this dataset.
+
+These results are also reflected in our visualization outputs. The bar
+graphs allowed us to see where the strongest differences between
+severity levels lie, and in several cases, like chest pain and smoking,
+they mirrored the findings from the logistic regression. Combining the
+regression output with visual trends gave us a clearer picture of which
+variables play a role in predicting cancer severity.
+
+These findings have several important implications for predicting cancer
+severity. For instance, if an individual consistently experiences chest
+pain, coughs up blood, loses weight quickly, or frequently gets colds,
+our model suggests that these symptoms may be warning signs of more
+severe cancer. Similarly, knowing that an individual is male, older, and
+exposed to high levels of smoking or air pollution may also signal
+higher risk. This type of information can be clinically valuable, as
+recognizing these patterns early on could allow individuals to receive
+earlier evaluation and care. While our model is not able to diagnose
+anything, it does highlight certain symptom and lifestyle profiles that
+appear more frequently among those with high cancer severity.
+
+That said, our methodology has several limitations that affect both
+interpretation and generalizability. First, many of the symptoms and
+exposures in the dataset were self-reported, meaning that
+distinctions---such as what qualifies as a ``frequent cold'' versus an
+``occasional cold''---may be vague or inconsistent across participants.
+This introduces measurement error and reduces the validity of our
+results. Second, collapsing the outcome variable into a binary measure
+(High vs.~Low/Medium) removed important nuances. Using logistic
+regression in this way only allows us to make statements about high
+severity, not about how predictors vary across all three original
+levels. This is reflected in the EDA as the boxplots show the nuances
+between low and medium risk as well. Additionally, the boxplots revealed
+substantial overlap in several predictors across cancer levels, which
+suggests that no single variable alone is determinative. This overlap
+also highlights the limitations of using only these predictors to draw
+clear boundaries between cancer severity categories. An ordinal logistic
+regression model would have been a more appropriate approach because it
+preserves the ordered structure of the outcome(UCLA).
+
+\subsection{Works Cited}\label{works-cited}
+
+ChatGPT: OpenAI. (2025). ChatGPT (Version 4.5) {[}Large language
+model{]}.
+\url{https://chatgpt.com/share/692dd219-c800-8004-9031-e7b2000d820b}
+This transcript details a conversation we had with an AI model when
+needing help to produce data tables to transfer the logistic regression
+outputs into a cleaner, more reader friendly table.
+
+Islami, Farhad, et al.~``Proportion and Number of Cancer Cases and
+Deaths Attributable to Potentially Modifiable Risk Factors in the United
+States.'' CA: A Cancer Journal for Clinicians, vol.~68, no. 1, 21
+Nov.~2017, pp.~31--54,
+acsjournals.onlinelibrary.wiley.com/doi/full/10.3322/caac.21440,
+\url{https://doi.org/10.3322/caac.21440}.
+
+Shankar, Abhishek, et al.~``Environmental and Occupational Determinants
+of Lung Cancer.'' Translational Lung Cancer Research, vol.~8, no. 1, 1
+May 2019, pp.~S31--S49, www.ncbi.nlm.nih.gov/pmc/articles/PMC6546634/,
+\url{https://doi.org/10.21037/tlcr.2019.03.05}.
+
+Tindle, Hilary A., et al.~``Lifetime Smoking History and Risk of Lung
+Cancer: Results from the Framingham Heart Study.'' JNCI: Journal of the
+National Cancer Institute, vol.~110, no. 11, 1 Nov.~2018,
+pp.~1201--1207, academic.oup.com/jnci/article/110/11/1201/4996947,
+\url{https://doi.org/10.1093/jnci/djy041}.
+
+UCLA: Statistical Consulting Group. ``Ordinal Logistic Regression
+\textbar{} R Data Analysis Examples.'' Stats.oarc.ucla.edu, 2021,
+stats.oarc.ucla.edu/r/dae/ordinal-logistic-regression/.
+
+Wu, Xiu, et al.~``Disentangling the Effects of Various Risk Factors and
+Trends in Lung Cancer Mortality.'' Scientific Reports, vol.~15, no. 1,
+13 Mar.~2025, www.nature.com/articles/s41598-025-92373-2,
+\url{https://doi.org/10.1038/s41598-025-92373-2}. Accessed 10 Apr.~2025.
+
+\end{document}

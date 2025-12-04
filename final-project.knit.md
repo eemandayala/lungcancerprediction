@@ -7,9 +7,7 @@ output:
   word_document: default
 ---
 
-```{r, echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 ## Multivariable Analysis of Symptom Profiles and Risk Factors in Cancer Patients
 
 ## Introduction
@@ -56,54 +54,28 @@ To evaluate the results, a hypothesis test was included. The null hypothesis is 
 
 The results from the regression model are shown below. 
 
-```{r, include=FALSE}
-library(tidyverse)
 
-dat <- read_csv("cancer patient data sets 2.csv")
-
-library(MASS)
-
-dat <- read_csv("cancer patient data sets 2.csv")
-
-names(dat) <- make.names(names(dat))
-
-names(dat)
-
-dat$Level <- factor(dat$Level,
-                     levels = c("Low","Medium","High"),
-                     ordered = TRUE)
-
-dat <- dat |>
-  mutate(High = if_else(Level == "High", 1, 0))
-
-
-
-m1causes <- glm(High ~ Gender + Genetic.Risk + Age + Smoking + Air.Pollution + Obesity, data = dat, family = "binomial")
-
-
-
-summary(m1causes)
-
-m1symptoms <- glm(High ~  Chest.Pain + Coughing.of.Blood + Shortness.of.Breath + Weight.Loss + Frequent.Cold, data = dat, family = "binomial")
-summary(m1symptoms)
-```
 
 ## Symptom Predictors
 
-```{r, echo=FALSE}
-library(gt)
-dg <- data.frame(
-  Estimate = c(-18.285,0.848,1.356,-0.147,1.102,0.368),
-  "Standard Error" = c(1.762,0.148,0.147,0.112,0.176,0.104),
-  pValue = c(2e-16,1.14e-8,2e-16,0.190,3.42e-10,3.89e-4),
-  row.names = c("Intercept","Chest Pain","Coughing of Blood","Shortness of Breath","Weight Loss","Frequent Cold")
-)
-dg %>%
-  gt(rownames_to_stub = TRUE) %>%
-  tab_header(
-    title = "Logression Coefficients For Cancer Symptoms"
-  )
-```
+\begin{table}[t]
+\caption*{
+{\large Logression Coefficients For Cancer Symptoms}
+} 
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|rrr}
+\toprule
+ & Estimate & Standard.Error & pValue \\ 
+\midrule\addlinespace[2.5pt]
+Intercept & -18.285 & 1.762 & 2.00e-16 \\ 
+Chest Pain & 0.848 & 0.148 & 1.14e-08 \\ 
+Coughing of Blood & 1.356 & 0.147 & 2.00e-16 \\ 
+Shortness of Breath & -0.147 & 0.112 & 1.90e-01 \\ 
+Weight Loss & 1.102 & 0.176 & 3.42e-10 \\ 
+Frequent Cold & 0.368 & 0.104 & 3.89e-04 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
 Table 1 : Logistic regression model for symptoms predicting cancer level
 
 Chest Pain, Coughing of Blood, Weight Loss, and Frequent Cold were statistically significant predictors of high cancer severity (p < 0.01), and we reject the null hypothesis for each. Hence, there is sufficient evidence to suggest that the log odds of having high cancer level is associated with each of these predictors while controlling for the predictors in the model.
@@ -114,22 +86,25 @@ Shortness of Breath was not statistically significant (p : 0.19 > 0.01), so we f
 
 ## Personal/Environmental Factor Predictors   
 
-```{r, echo=FALSE}
-library(gt)
-
-
-df <- data.frame(
-  Estimate = c(-16.270, 1.928, -0.258,-0.052,.794,1.227,1.590),
-  "Standard Error" = c(1.796, 0.476, 0.142,0.014,0.102,.137,.149),
-  pValue = c(2.00e-16,5.14e-5,0.071,2.00e-4,1.15e-14,2.00e-16,2.00e-16),
-  row.names = c("Intercept","Gender", "Genetic Risk", "Age","Smoking","Air Pollution", "Obesity")
-)
-df %>%
-  gt(rownames_to_stub = TRUE) %>%
-  tab_header(
-    title = "Logression Coefficients For Cancer Markers"
-  )
-```
+\begin{table}[t]
+\caption*{
+{\large Logression Coefficients For Cancer Markers}
+} 
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|rrr}
+\toprule
+ & Estimate & Standard.Error & pValue \\ 
+\midrule\addlinespace[2.5pt]
+Intercept & -16.270 & 1.796 & 2.00e-16 \\ 
+Gender & 1.928 & 0.476 & 5.14e-05 \\ 
+Genetic Risk & -0.258 & 0.142 & 7.10e-02 \\ 
+Age & -0.052 & 0.014 & 2.00e-04 \\ 
+Smoking & 0.794 & 0.102 & 1.15e-14 \\ 
+Air Pollution & 1.227 & 0.137 & 2.00e-16 \\ 
+Obesity & 1.590 & 0.149 & 2.00e-16 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
 Table 2: Logistic regression model output for personal/environmental factors predicting cancer level
 
 Gender, Age, Smoking, Air Pollution, and Obesity were statistically significant predictors of high cancer severity (p < 0.01), and we reject the null hypothesis for each of these variables. Thus, there is sufficient evidence to suggest that the log odds of being in the high cancer category is associated with these predictors, while controlling for the other factors in the model. 
@@ -146,71 +121,11 @@ Finally, Genetic Risk, although measured on an ordinal scale, did not show a sta
 
 Two sets of box plots were made corresponding to the two predictor categories. 
 
-```{r,echo=FALSE}
-library(tidyverse)
-
-label_vec <- c(
-  "Age" = "Age (years)"
-)
-
-dat_long <- dat|>
-  pivot_longer(
-    cols = c(Genetic.Risk, Age, Smoking, Air.Pollution, Obesity),
-    names_to = "Variable",
-    values_to = "Value") |>
-
-mutate(Variable = recode(Variable,
-                           "Age" = "Age (years)"))
-
-
-ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
-  geom_boxplot() +
-  facet_wrap(~ Variable, scales = "free_y") +
-  scale_fill_manual(
-  values = c(
-    "Low" = "pink",
-    "Medium" = "turquoise",
-    "High" = "yellow"
-  )
-) +
-  theme_bw() |>
- labs(
-    title = "Personal and Environmental Predictors",
-    x = "Cancer Level",
-    y = "Value"
-  )
-```
+![](final-project_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 For the personal and environmental predictors, the boxplots show noticeable increase in Smoking, Air Pollution and Obesity scores as cancer severity level increases to high. For genetic risk, there seems to be a difference between Low and High Cancer level with the Medium level having a broader genetic risk score overlapping with both. This aligns with the regression model as the low and medium cancer level together overlap entirely with the high level box plot. However, age does not seem to align with the model as the box plots overlap a lot between the levels in terms of age which might contradict it being statistically significant.
 
-```{r,echo=FALSE}
-library(tidyverse)
-
-dat_long <- dat|>
-  pivot_longer(
-    cols = c(Chest.Pain, Coughing.of.Blood, Shortness.of.Breath, Weight.Loss, Frequent.Cold),
-    names_to = "Variable",
-    values_to = "Value") 
-
-
-ggplot(dat_long, aes(x = Level, y = Value, fill = Level)) +
-  geom_boxplot() +
-  facet_wrap(~ Variable, scales = "free_y") +
-    scale_fill_manual(
-  values = c(
-    "Low" = "pink",
-    "Medium" = "turquoise",
-    "High" = "yellow"
-  )
-  ) +
-  theme_bw() |>
- labs(
-    title = "Symptom Predictors",
-    x = "Cancer Level",
-    y = "Value"
-  )
-
-```
+![](final-project_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 For the symptom predictors, the box plots show patterns that are somewhat consistent with the regression model with some exceptions. Chest Pain and Coughing of Blood display the clearest visual differences across cancer severity levels, with noticeably higher scores in the High category that aligns with the model. Weight Loss and Frequent Cold also show increases in the High category, but the distributions overlap more substantially with the Low and Medium groups which can suggest a weaker association comparatively even though they are stated to be statistically significant based on the model. Finally, although shortness of breath was not statistically significant in the model, there is some indication that the high level cancer has a slightly higher score for this symptom. 
 
